@@ -7,6 +7,11 @@ public class Command {
 		this.action = action;
 		this.setView();
 	}
+	public Command(String directory, String action, String page) {
+		this.directory = directory;
+		this.action = action;
+		this.setView(page);
+	}
 	public String getDirectory() {
 		return directory;
 	}
@@ -24,6 +29,9 @@ public class Command {
 	}
 	public void setView() {
 		this.view = Constants.VIEW+this.directory+"/"+this.action+".jsp";
+	}
+	public void setView(String page) {
+		this.view = Constants.VIEW+this.directory+"/"+page+".jsp";
 	}
 	
 }
