@@ -13,12 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import global.Command;
 import global.CommandFactory;
 import global.DispatcherServlet;
+import global.ParamMap;
 
 /**
  * Servlet implementation class IndexController
  */
 @WebServlet({"/form_tag/main.do",
-	      "/form_tag/checkbox.do"})
+	      "/form_tag/school_register.do"})
 public class IndexController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	CommandFactory factory = new CommandFactory();
@@ -29,39 +30,12 @@ public class IndexController extends HttpServlet {
 		switch (command.getAction()) {
 			case "main": break;
 			case "file_input":break;
-			case "checkbox":
-				System.out.println("체크박스 프로세스 진입");
-				
-				Map paramMap = request.getParameterMap();
-				String[] names = (String[]) paramMap.get("name");
-				String name = names[0];
-				String[] ages = (String[]) paramMap.get("age");
-				String age = ages[0];
-				String addr = ((String[])paramMap.get("addr"))[0];
-				String[] subjects = (String[]) paramMap.get("subject");
-				System.out.println("넘어온 과목들 : "+subjects.length);
-				StringBuffer subject = new StringBuffer();
-				for (int i = 0; i < subjects.length; i++) {
-					if (subjects[i].equals("asp")) {
-						subject = subject.append("ASP프로그래밍,"); 
-						continue;
-					}
-					if (subjects[i].equals("jsp")) {
-						subject = subject.append("JSP프로그래밍,"); 
-						continue;
-					}
-					if (subjects[i].equals("php")) {
-						subject = subject.append("PHP프로그래밍,"); 
-						continue;
-					}
-					if (subjects[i].equals("java")) {
-						subject = subject.append("Java프로그래밍,"); 
-						continue;
-					}
-				}
-				request.setAttribute("name", name);
-				request.setAttribute("age", age);
-				request.setAttribute("subject", subject); 
+			case "school_register":
+				request.setAttribute("name", ParamMap.getParam(request, "name"));
+				request.setAttribute("age", ParamMap.getParam(request, "age"));
+				request.setAttribute("addr", ParamMap.getParam(request, "addr"));
+				request.setAttribute("major", ParamMap.getParam(request, "major"));
+				request.setAttribute("subject", ParamMap.getParams(request, "subject")); 
 				break;	
 			default:
 				break;
