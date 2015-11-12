@@ -2,10 +2,10 @@ package global;
 
 public class Command {
 	private String directory, action, view;
-	public Command(String directory, String action, String view) {
+	public Command(String directory, String action) {
 		this.directory = directory;
 		this.action = action;
-		this.view = view;
+		this.setView();
 	}
 	public String getDirectory() {
 		return directory;
@@ -22,8 +22,8 @@ public class Command {
 	public void setAction(String action) {
 		this.action = action;
 	}
-	public void setView(String view) {
-		this.view = view;
+	public void setView() {
+		this.view = Constants.VIEW+this.directory+"/"+this.action+".jsp";
 	}
 	
 }

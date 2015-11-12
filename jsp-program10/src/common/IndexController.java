@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import global.Command;
 import global.CommandFactory;
 import global.Constants;
+import global.DispatcherServlet;
 
 /**
  * Servlet implementation class IndexController
@@ -29,31 +30,24 @@ public class IndexController extends HttpServlet {
     
 	CommandFactory factory = new CommandFactory();
 	Command command;
-	
+	DispatcherServlet dis = new DispatcherServlet();
 	public void init(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException{
 		String path = request.getServletPath();
 		String directory = path.split("/")[1]; // 패스중에서 경로를 추출한다 => member
 		String extendtion = path.split("/")[2]; // 패스중에서 form.do
 		String action = extendtion.substring(0, extendtion.indexOf(".")); // 익스텐션을 편집해서 switch case 의 key 값을 추출한다
-		System.out.println("액션 : "+action);
-		command = factory.createCommand(directory, action,Constants.makeView(directory,action));
-		
+		command = factory.createCommand(directory, action);
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		init(request,response);
 		switch (command.getAction()) {
-		case "form":
-			RequestDispatcher dis = 
-				request.getRequestDispatcher(Constants.makeView(command.getDirectory(),command.getAction()));
-			dis.forward(request, response);
+		case "file_input":
+			dis.send(request, response, command);
 			break;
 		case "checkbox":
-			System.out.println("체크박스 진입");
-			RequestDispatcher dis2 = 
-				request.getRequestDispatcher(Constants.makeView(command.getDirectory(),command.getAction()));
-			dis2.forward(request, response);
+			dis.send(request, response, command);
 			break;	
 			
 		default:
@@ -107,7 +101,7 @@ public class IndexController extends HttpServlet {
 			}
 			System.out.println(name+ "가 선택한 과목 : "+subject);
 			RequestDispatcher dis3 = 
-				request.getRequestDispatcher(Constants.makeView(command.getDirectory(),command.getAction()));
+				request.getRequestDispatcher(command.getView());
 			dis3.forward(request, response);
 			break;	
 		default:
