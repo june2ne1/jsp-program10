@@ -12,6 +12,7 @@
 	.tab_school_register tr {border : 1px solid black; width : 250px}
 	.tab_school_register tr td{border : 1px solid black; width : 250px}
 </style>
+
 <table class="tab_school_register" >
  <tr>
 	 <td>이름</td>

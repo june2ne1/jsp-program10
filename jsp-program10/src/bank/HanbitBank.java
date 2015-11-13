@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class HanbitBank {
 	public static void main(String[] args) {
-		BankService service = new BankService();
+		Bank service = BankService.getInstance();
 		Account account = new Account();
 		Scanner scanner = new Scanner(System.in);
 		

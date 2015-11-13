@@ -1,6 +1,6 @@
 package rps;
 
-public class GameRps {
+public class Rps {
 	int rock; // 바위
 	int paper; // 보자기
 	int scissors; // 가위

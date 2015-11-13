@@ -1,4 +1,4 @@
-package common;
+package form_tag;
 
 import java.io.IOException;
 import java.util.Enumeration;
@@ -20,7 +20,7 @@ import global.ParamMap;
  */
 @WebServlet({"/form_tag/main.do",
 	      "/form_tag/school_register.do"})
-public class IndexController extends HttpServlet {
+public class FormTagController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	CommandFactory factory = new CommandFactory();
 	Command command;
@@ -31,11 +31,11 @@ public class IndexController extends HttpServlet {
 			case "main": break;
 			case "file_input":break;
 			case "school_register":
-				request.setAttribute("name", ParamMap.getParam(request, "name"));
-				request.setAttribute("age", ParamMap.getParam(request, "age"));
-				request.setAttribute("addr", ParamMap.getParam(request, "addr"));
-				request.setAttribute("major", ParamMap.getParam(request, "major"));
-				request.setAttribute("subject", ParamMap.getParams(request, "subject")); 
+				request.setAttribute("name", ParamMap.getValueBy(request, "name"));
+				request.setAttribute("age", ParamMap.getValueBy(request, "age"));
+				request.setAttribute("addr", ParamMap.getValueBy(request, "addr"));
+				request.setAttribute("major", ParamMap.getValueBy(request, "major"));
+				request.setAttribute("subject", ParamMap.getValuesBy(request, "subject")); 
 				break;	
 			default:
 				break;

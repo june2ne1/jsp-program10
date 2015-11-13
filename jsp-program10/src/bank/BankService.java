@@ -13,7 +13,10 @@ import java.util.Scanner;
 public class BankService implements Bank{
 	
 	private Account account = new Account(); //공식 가져오는 곳
-
+	
+	private static Bank instance = new BankService();
+	private BankService(){}
+	public static Bank getInstance(){return instance;}
 
 	@Override // deposit
 	public String deposit(int inMoney) { // 입금

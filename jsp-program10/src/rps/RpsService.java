@@ -1,6 +1,6 @@
 package rps;
 
-public interface GameRpsService {
+public interface RpsService {
 	public String getResult(int result);
 	public String playGame(int a, int b);
 }
