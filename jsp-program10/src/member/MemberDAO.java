@@ -22,12 +22,10 @@ public class MemberDAO extends DAO{
 	private MemberVO member = new MemberVO();
 	
 	private static MemberDAO instance = new MemberDAO();
-	
 	public static MemberDAO getInstance(){
 		return instance;
 	}
-	
-	public MemberDAO() {
+	private MemberDAO() {
 		con = DatabaseFactory
 				.getDatabase(Vendor.ORACLE, Constants.ORACLE_ID, Constants.ORACLE_PASSWORD)
 				.getConnection();

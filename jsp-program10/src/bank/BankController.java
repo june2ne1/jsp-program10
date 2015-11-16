@@ -12,22 +12,23 @@ import global.CommandFactory;
 import global.DispatcherServlet;
 import global.ParamMap;
 
-/**
- * Servlet implementation class BankController
- */
-@WebServlet({"/bank/main.do","/bank/open.do"})
+@WebServlet({"/bank/main.do","/bank/open.do","/bank/remaind.do"})
 public class BankController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	CommandFactory factory = new CommandFactory();
 	Command command;
 	DispatcherServlet dis = new DispatcherServlet();
-	Bank service = BankService.getInstance();
+	BankService service = BankServiceImpl.getInstance();
 	private void action(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException{
 		switch (command.getAction()) {
 		case "main":
-			goPage();
+			goPage(request);
+			break;
+		case "remaind": 
+			String userid = ParamMap.getValueBy(request, "userid");
+			service.search();
 			break;
 		case "open":
 			String name = ParamMap.getValueBy(request, "name");
@@ -43,11 +44,19 @@ public class BankController extends HttpServlet {
 		dis.send(request, response, command);
 	}
 
-	private void goPage() {
+	private void goPage(HttpServletRequest request) {
 		switch (command.getPage()) {
 		case "bank":break;
 		case "guest":break;
 		case "admin":break;
+		case "admin_result":
+			String table = ParamMap.getValueBy(request, "table_name");
+			String column = ParamMap.getValueBy(request, "column");
+			String pk = ParamMap.getValueBy(request, "pk");
+			System.out.println("테이블명 : "+table); 
+			
+			service.makeTable(table, column, pk);
+			break;
 		default:break;
 			
 		}

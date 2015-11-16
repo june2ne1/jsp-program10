@@ -7,7 +7,7 @@ package bank;
  * @story : 통장 개설 프로그램
  */
 
-public class Account {
+public class AccountVO {
 
 	protected int accountNo; // 계좌번호
 	protected String ownerName; // 계좌주인
@@ -21,7 +21,7 @@ public class Account {
 	 * toString, 계좌생성.
 	 * 
 	 */
-	public Account() {
+	public AccountVO() {
 		this.accountNo = (int) ((Math.random() * 999999) + 100000);
 	}
 
