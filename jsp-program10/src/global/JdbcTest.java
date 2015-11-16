@@ -13,17 +13,22 @@ public class JdbcTest {
         ResultSet rs = null;
         
         try {
-            Class.forName(Constants.HSQL_DRIVER);
+          /*  Class.forName(Constants.HSQL_DRIVER);
             conn = DriverManager.getConnection(
 					Constants.HSQL_URL,
 					Constants.HSQL_ID,
-					Constants.HSQL_PASSWORD);
+					Constants.HSQL_PASSWORD);*/
+        	Class.forName(Constants.ORACLE_DRIVER);
+            conn = DriverManager.getConnection(
+					Constants.ORACLE_URL,
+					Constants.ORACLE_ID,
+					Constants.ORACLE_PASSWORD);
 				stmt = conn.createStatement();
 				
 				rs = stmt.executeQuery("select * from TEST ");
 				String id = null;
 				while (rs.next()) {
-					id = rs.getString("userid");
+					id = rs.getString("name");
 				}
 				System.out.println("ID : "+id);
         } catch (Exception e ) {

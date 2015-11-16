@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class HanbitOffice {
 	public static void main(String[] args) {
-		Admin service = new AdminService(1000);
+		AdminService service = new AdminServiceImpl(1000);
 		// 인터페이스 객체 = new 인터페이스를 구현한클래스생성자
-		Account account = new Account();
+		AccountVO account = new AccountVO();
 		Scanner scanner = new Scanner(System.in);
 		
 		while (true) {
@@ -36,7 +36,7 @@ public class HanbitOffice {
 			case 3:
 				System.out.println("검색할 이름을 입력해주세요.");
 				String searchName = scanner.next();
-				Account [] arr = service.searchAccountsByName(searchName);
+				AccountVO [] arr = service.searchAccountsByName(searchName);
 				for (int i = 0; i < arr.length; i++) {
 					System.out.println(arr[i]);
 				}
