@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class DispatcherServlet {
-	public void send(HttpServletRequest request, 
+	public static void send(HttpServletRequest request, 
 			HttpServletResponse response,
 			Command command)throws ServletException, IOException{
 		RequestDispatcher dis = 

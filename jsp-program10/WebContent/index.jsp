@@ -6,4 +6,5 @@
 <a href="${context}/form_tag/main.do?page=checkbox">체크박스</a><br />
 <a href="${context}/bank/main.do?page=bank">한빛은행</a><br />
 <a href="${context}/member/main.do?page=default">회원관리</a><br />
+<a href="${context}/jquery/main.do?page=selector">jQuery</a><br />
 

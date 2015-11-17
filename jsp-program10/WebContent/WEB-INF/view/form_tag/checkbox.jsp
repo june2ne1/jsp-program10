@@ -29,11 +29,10 @@
 </form>
 <script src="${context}/js/part2.js"></script>
 <script type="text/javascript">
-	   document.getElementById('btn_checkbox').addEventListener('click', function() {
-		var form = document.getElementById('frm_checkbox');
-		part2.checkbox(form.subject);  
+	   $('#btn_checkbox').click(function() {
+		part2.checkbox($('#frm_checkbox').find(":checkbox:checked"));  
 		/* form 객체 내부의 name 값으로 value 값에 접근할 수 있다 */
-		form.submit();
+		$('#frm_checkbox').submit();
 	});
 </script>
     
