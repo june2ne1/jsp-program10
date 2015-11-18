@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import global.DispatcherServlet;
 import global.ParamMap;
 import global.Seperator;
-import member.MemberVO;
 
 /**
  * Servlet implementation class JQueryController
