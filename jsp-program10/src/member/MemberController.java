@@ -9,10 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import global.DispatcherServlet;
 import global.ParamMap;
 import global.Seperator;
+import jdk.nashorn.internal.ir.RuntimeNode.Request;
 
 /**
  * @ 는 annotation 이라고 부르며, 매핑 기능을 함.
@@ -21,16 +23,17 @@ import global.Seperator;
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	MemberService service = MemberServiceImpl.getInstance();
-	
 	public void service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException{
 		Seperator.init(request,response);
+		HttpSession session = request.getSession();
 		switch (Seperator.command.getAction()) {
 		case "main":goPage(request);break;  // get 방식은 이쪽으로 접수
 		case "mypage" : 
 			String userid = ParamMap.getValueBy(request, "userid");
 			String password = ParamMap.getValueBy(request, "password");
 			MemberVO member = service.login(userid, password);
+			session.setAttribute("LOGINED_ID", member.getUserid());
 			request.setAttribute("member", member);
 			break;
 		default:break;

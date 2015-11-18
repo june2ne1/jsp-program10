@@ -1,16 +1,19 @@
 package rps;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import global.Command;
 import global.CommandFactory;
 import global.DispatcherServlet;
 import global.ParamMap;
+import member.MemberVO;
 
 @WebServlet("/rps/main.do")
 public class RpsController extends HttpServlet {
@@ -19,11 +22,13 @@ public class RpsController extends HttpServlet {
 	Command command;
 	DispatcherServlet dis = new DispatcherServlet();
 	RpsService service = RpsServiceImpl.getInstance();
-
 	private void action(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		switch (command.getAction()) {
 		case "main":
 			System.out.println("== 메인 진입 ==");
+			String loginedID = (String) session.getAttribute("LOGINED_ID");
+			System.out.println("로그인한 아이디"+loginedID);
 			this.goPage(request, command.getPage());
 			break;
 		default:
