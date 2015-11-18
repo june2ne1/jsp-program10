@@ -33,7 +33,7 @@
 		</ul>
 		<h3>서버와 데이터 통신을 위한 자바스크립트 : NodeJS</h3>
 	</div>
-	<div>
+	<div id="config_element" class="bg_color_yellow">
 		<h3>JS와 관련있는 HTML 구성요소</h3>
 		<ul>
 			<li>요소(Element : 엘리먼트) 내용을 구성하는 것으로, 태그로 표현된다</li>
@@ -41,7 +41,7 @@
 			<li>속성(Attribute : 어트리뷰트) 요소에 대한 추가적인 특징(HTML 추가 속성)</li>
 		</ul>
 	</div>
-	<div class="pad"></div>
+	<div class="pad bg_color_yellow"></div>
 	<table>
 		<tr>
 			<th>패턴</th>
@@ -104,7 +104,19 @@
 			<td>속성 A의 값이 V로 시작하는 모든 엘리먼트</td>
 		</tr>
 	</table>
+	<input type="button" id="btn_box" value="색상변경" />
+	<input type="button" id="btn_box2" value="글자추가" />
 </div>
-
+<script type="text/javascript">
+	$('#btn_box').click(function() {
+		$('#config_element')
+		.removeClass('bg_color_yellow')
+		.addClass('bg_color_red');
+	});
+	$('#btn_box2').click(function() {
+		$(".pad").text( "text() 는 글자를 추가하는 메소드임" ); 
+	});
+	
+</script>
 
 
