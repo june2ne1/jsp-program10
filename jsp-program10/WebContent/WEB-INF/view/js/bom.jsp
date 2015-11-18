@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="outbox">
 	<div class="box">
+		<input type="button" id="back" value="뒤로가기" />
 		<h3>자바스크립트 객체와 자바의 차이점</h3>
 		JS 는 객체기반언어이다. Java 는 객체지향언어이다. <br />
 		두 언어간의 차이점은 객체를 표현하는데 있어서, 자바는 클래스(객체의 정의)와 <br />
@@ -31,12 +32,34 @@
 		같이 사용해야 하나, window 를 생략하고 사용 가능하다.
 		(자바에서의 this 의 개념으로 이해하시길...)
 		Window 가 최상위 객체이긴 하나, 추상적인 개념의 최상위 객체인 Object 가 존재한다.
-		
 	</p>
-	<input type="button" id="btn" value="창닫기" />
+	<a href="#" id="opener">window.open 열기</a> <br />
+	<a href="${context}/js/main.do?page=popup" target="_blank">a태그 새창 열기</a> <br />
+	<a href="#" id="location">DOM 페이지 이동</a>
 </div>
 <script>	
-	$('#btn').click(function() {
-		window.close();
+	$('#opener').click(function() {
+		bom.popup();
 	});
+	$('#location').click(function() {
+		location.href = "${context}/js/main.do?page=dom";
+	});
+	$('#back').click(function() {
+		history.go(-1);
+	});
+	var bom = {};
+	bom.popup = function() {
+		var url     = "${context}/js/main.do?";
+        var name    = "팝업";
+        var style   = "toolbar=no,status=no,directories=no,scrollbars=yes,location=no,resizable=no,border=0,menubar=no";
+        var param   = "page=popup";      //없으면 지워도 됨.
+        var width   = 600;   //가로 사이즈 조절
+        var height  = 400;    //세로 사이즈 조절
+        var xpos    = (screen.availWidth - width  ) / 2;
+        var ypos    = (screen.availHeight- height ) / 2;
+        style       = style+',top='+ypos+',left='+ xpos +',width=' + width + ',height=' + height;
+        url         = url+param;
+        window.open(url,'',style);
+	        
+	}
 </script>

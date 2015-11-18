@@ -28,6 +28,9 @@ public class JsController extends HttpServlet {
 	private void goPage(HttpServletRequest request) {
 		switch (Seperator.command.getPage()) {
 			case "selector":break;
+			case "popup":break;
+			case "dom":break;
+			case "form_tag":break;
 			default:break;
 		}
 	}
