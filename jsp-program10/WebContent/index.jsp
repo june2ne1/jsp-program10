@@ -3,7 +3,7 @@
 	<div class="box">
 		<h1>Javascript</h1>
 		<ul>
-			<li><a href=""></a></li>
+			<li><a href="${context}/js/main.do?page=hello">Javascript 소개</a></li>
 			<li></li>
 			<li></li>
 			<li></li>

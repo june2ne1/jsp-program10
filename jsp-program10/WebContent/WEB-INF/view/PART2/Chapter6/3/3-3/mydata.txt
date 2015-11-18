@@ -1,2 +1,0 @@
-mydata.txt 파일의 내용입니다.
-getResourceAsStream() 메소드를 통해 출력되었습니다.
