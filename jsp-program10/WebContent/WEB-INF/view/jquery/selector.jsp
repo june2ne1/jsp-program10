@@ -33,10 +33,13 @@
 		configDiv1 : function() {
 			$('div#selectorBox').remove();
 			$('div#selectorOutbox')
-			.append('<span id="selectorSimple">심플</span>')
-			.append('<span class="selectorJquery">제이쿼리</span>')
-			.append('<span>기본테스트</span>')
-			.append('<div class="selectorJquery">샘플</div>');
+			.append('<span id="selectorSimple">스팬1</span><br/>')
+			.append('<span class="span_class">스팬2_1</span><br/>')
+			.append('<span class="span_class">스팬2_2</span><br/>')
+			.append('<span class="span_class">스팬2_3</span><br/>')
+			.append('<span class="span_class">스팬2_4</span><br/>')
+			.append('<span>스팬3</span><br/>')
+			.append('<div class="span_class">스팬4</div>');
 		},
 		back : function() {
 			history.go(-1);
@@ -45,22 +48,23 @@
 		no1 : function(){
 			this.configDiv1();
 			$('span').addClass('font_color_red');
-			$('div.selectorJquery').addClass('bg_color_yellow');
+			$('div.span_class').addClass('bg_color_yellow');
 			$('span#selectorSimple').addClass('font_size_30')
 				.addClass('font_style_italic');
 		},
 		/*한번에 다양한 엘리먼트에 접근하여 갯수와 텍스트 얻기*/
 		no2 : function(){
 			this.configDiv1();
+			var $searchElems = $('span,div.span_class');
+			$searchElems.css( "border", "3px solid red" );
 			var result = '';
-			var $searchElems = $('span, div.selectorJquery');
-			result += '검색된 엘리먼트 수 : ' + $searchElem.length + '\n';
+			result += '검색된 엘리먼트 수 : ' + $searchElems.length + '\n';
 			/*length 대신에 size() 를 사용해도 가능하다*/
 			/*each() 는 for-loop 기능*/
 			$searchElems.each(function() {
 				result += $(this).text()+'\n';
 			});
-			alert($.trim(result));
+			alert(result);
 		},
 		configDiv3 : function(){
 			$('div#selectorBox').remove();
@@ -118,7 +122,7 @@
 				a:link{text-decoration : none}
 				a:visited{color : blue}
 				*/
-				if($('#userid:text').val()==""){
+				if($('#userid').val()==""){
 					alert('아이디를 입력하세요');
 					return;
 				}
