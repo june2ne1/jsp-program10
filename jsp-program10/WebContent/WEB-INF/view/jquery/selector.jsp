@@ -1,30 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../common/header.jsp"%>
 <h1>셀렉터</h1>
-<div id="myDiv">
-	Hello
+<div class="outbox" id="selectorOutbox">
+	<button id="back">뒤로가기</button>
+	<div class="box" id="selectorBox">
+		<h3>셀렉터란</h3>
+		<h4>셀렉터는 문서 내에서 원하는 엘리먼트를 쉽게 식별하고 <br />
+			이를 추출하기 위해 jQuery 에서 제공하는 기술
+		</h4>
+		<h3>셀렉터 다루기</h3>
+		<ol> 
+			<li><button id="selectNo1">엘리먼트에 접근해서 스타일 지정하기</button></li>
+			<li><button id="selectNo2">한번에 다양한 엘리먼트에 접근하여 갯수와 텍스트 얻기</button></li>
+			<li><button id="selectNo3">조건에 만족하는 짝수와 홀수에 위치한 엘리먼트 구별하기</button></li>
+			<li><button id="selectNo3_1">n번째로 일치하는 엘리먼트 스타일 적용</button></li>
+			<li><button id="selectNo4">로그인 폼 정의</button></li>
+			<li><button id="selectNo5">다중 체크박스</button></li>
+		</ol>
+	</div>
 </div>
-<div class="classDiv">
-	클래스 선택
-</div>
-<input type="button" id="btn" value="버튼"/>
 
 <script type="text/javascript">
-/* 	alert(document.getElementById('myDiv').innerHTML); */
-	
-	$('#btn').click(function() {
-		alert($('#myDiv').html());
-		alert($('.classDiv').html());
-	});
-	var t = {};
+	$(document).ready(function() {
+		$('#selectNo1').click(function(){selector.no1()});
+		$('#selectNo2').click(function(){selector.no2()});
+		$('#selectNo3').click(function(){selector.no3()});
+		$('#selectNo3_1').click(function(){selector.no3_1()});
+		$('#selectNo4').click(function(){selector.no4()});
+		$('#selectNo5').click(function(){selector.no5()});
+		$('#back').click(function(){selector.back()});
+	});	
 	var selector = {
 		configDiv1 : function() {
 			$('div#selectorBox').remove();
-			$('div#selectorOutBox')
+			$('div#selectorOutbox')
 			.append('<span id="selectorSimple">심플</span>')
 			.append('<span class="selectorJquery">제이쿼리</span>')
 			.append('<span>기본테스트</span>')
 			.append('<div class="selectorJquery">샘플</div>');
+		},
+		back : function() {
+			history.go(-1);
 		},
 		/*엘리먼트에 접근해서 스타일 저장하기*/
 		no1 : function(){
