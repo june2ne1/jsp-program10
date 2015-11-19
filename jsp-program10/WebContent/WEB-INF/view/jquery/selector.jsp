@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="../common/header.jsp"%>
+<h1>셀렉터</h1>
 <div id="myDiv">
 	Hello
 </div>
@@ -6,6 +8,7 @@
 	클래스 선택
 </div>
 <input type="button" id="btn" value="버튼"/>
+
 <script type="text/javascript">
 /* 	alert(document.getElementById('myDiv').innerHTML); */
 	
@@ -13,4 +16,136 @@
 		alert($('#myDiv').html());
 		alert($('.classDiv').html());
 	});
+	var t = {};
+	var selector = {
+		configDiv1 : function() {
+			$('div#selectorBox').remove();
+			$('div#selectorOutBox')
+			.append('<span id="selectorSimple">심플</span>')
+			.append('<span class="selectorJquery">제이쿼리</span>')
+			.append('<span>기본테스트</span>')
+			.append('<div class="selectorJquery">샘플</div>');
+		},
+		/*엘리먼트에 접근해서 스타일 저장하기*/
+		no1 : function(){
+			this.configDiv1();
+			$('span').addClass('font_color_red');
+			$('div.selectorJquery').addClass('bg_color_yellow');
+			$('span#selectorSimple').addClass('font_size_30')
+				.addClass('font_style_italic');
+		},
+		/*한번에 다양한 엘리먼트에 접근하여 갯수와 텍스트 얻기*/
+		no2 : function(){
+			this.configDiv1();
+			var result = '';
+			var $searchElems = $('span, div.selectorJquery');
+			result += '검색된 엘리먼트 수 : ' + $searchElem.length + '\n';
+			/*length 대신에 size() 를 사용해도 가능하다*/
+			/*each() 는 for-loop 기능*/
+			$searchElems.each(function() {
+				result += $(this).text()+'\n';
+			});
+			alert($.trim(result));
+		},
+		configDiv3 : function(){
+			$('div#selectorBox').remove();
+			$('div#selectorOutbox')
+				.append('<table id="selectorTab">')
+				.append('</table>');
+			/*
+			* table 과 tr td 는 자스 내부적으로 볼때
+			* 다른 객체이다
+			*/
+			$('#selectorTab')
+				.append('<tr><td>하나</td><td>ONE</td></tr>')
+				.append('<tr><td>둘</td><td>TWO</td></tr>')
+				.append('<tr><td>셋</td><td>THREE</td></tr>')
+				.append('<tr><td>넷</td><td>FOUR</td></tr>')
+				.append('<tr><td>다섯</td><td>FIVE</td></tr>')
+		},
+		/*조건에 만족하는 짝수와 홀수에 위치한 엘리먼트 구별하기*/
+		no3 : function() {
+			this.configDiv1();
+			// backgroundColor 는 제이쿼리에서 미리 선언된 키값
+			$('tr:even').css('backgroundColor','pink');
+			$('tr:odd').css('backgroundColor','yellow');
+		},
+		/*n번째로 일치하는 엘리먼트 스타일 적용*/
+		no3_1 : function() {
+			this.configDiv1();
+			/*
+			* eq(n) n번째로 일치하는 엘리먼트에 스타일을 적용시킨다.
+			* 인덱스는 0부터 시작하여 가로방향으로 진행하여 라인 끝에 다다르면
+			* 다음 라인 왼쪽부터 오른쪽으로 진행한다. 지그재그 방향이다.
+			*/
+			$('tr:eq(4)').css('backgroundColor','yellow');
+			$('#selectorTab').addClass('tab');
+		},
+		no4 : function() {
+			$('div#selectorBox').remove();
+			$('div#selectorOutbox')
+				.append('<div><span class="item">아이디 *</span><input id="userid" type="text"/></div>')
+				.append('<div><span class="item">이름 *</span><input id="userName" type="text"/></div>')
+				.append('<div><span class="item">암호 *</span><input id="password" type="password"/></div>')
+				.append('<div><span class="item">암호확인 *</span><input id="pwdConfirm" type="password"/></div>')
+				.append('<input type="button" id="btn_reg" value="회원가입">');
+			$('#btn_reg').click(function() {
+				/*
+				* #userid:text 에서 : 마크는 pseudo[su:do] - class 수도-클래스(의사클래스) 라고 부른다.
+				원 단어의 뜻은 '거짓의' 라는 뜻이지만 자스에서는 
+				가상의 클래스를 뜻한다.
+				보통 엘리먼트 속성중에서 항상 있는 상태가 아닌 변화하는 상태를 나타낸다.
+				사용자가 클래스로 선언하지 않더라도 특정 이벤트를 
+				가지는 속성에서라면 수도 클래스를 통해 상태값을 반환한다.
+				:text 외에도 다음과 같은 사례가 있다.
+				
+				a:hover{color : #ABCDEF}
+				a:link{text-decoration : none}
+				a:visited{color : blue}
+				*/
+				if($('#userid:text').val()==""){
+					alert('아이디를 입력하세요');
+					return;
+				}
+				var userName = $('#userName:text').val();
+				if (userName == "") {
+					alert('이름을 입력하세요');
+					return;
+				}
+				if ($('#password:password').val() == "" || $('#pwdComfirm:password').val()=="") {
+					alert('암호를 입력하세요');
+					return;
+				}
+				if ($('#password:password').val() !=  $('#pwdComfirm:password').val()) {
+					alert('암호가 일치하지 않습니다.');
+					return;
+				}
+				/*회원가입을 마치면 입력값을 제거하는 기능*/
+				$('#userid:text').val('');
+				$('#userName:text').val('');
+				$('#password:password').val('');
+				$('#pwdConfirm:password').val('');
+				
+			});	
+		},
+		no5 : function() {
+			$('div#selectorBox').remove();
+			$('div#selectorOutbox')
+				.append('<div><span class="item">음악감상</span><input type="checkbox"name="hobby"value="music"/></div>')
+				.append('<div><span class="item">요가</span><input type="checkbox"name="hobby"value="yoga"/></div>')
+				.append('<div><span class="item">독서</span><input type="checkbox"name="hobby"value="reading"/></div>')
+				.append('<div><input type="button"id="btn_select"value="취미선택"/></div><div id="contents">결과</div>');
+			$('#btn_select:button').click(function() {
+				var checkedList = "";
+				var checkedConsole = "";
+				$('input[name="hobby"]:checkbox:checked').each(function() {
+					checkedList += $(this).prev().text() + "\t";
+					checkedConsole += $(this).text() + "\t";
+				});
+				$('#contents').html(checkedList);
+				console.log(checkedConsole);
+			});
+		}
+	};
+	
 </script>

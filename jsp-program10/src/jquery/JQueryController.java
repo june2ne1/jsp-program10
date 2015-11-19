@@ -28,7 +28,18 @@ public class JQueryController extends HttpServlet {
 	}
 	private void goPage(HttpServletRequest request) {
 		switch (Seperator.command.getPage()) {
+			case "hello":break;
+			case "form_tag":break;
 			case "selector":break;
+			case "traversing":break;
+			case "attr":break;
+			case "core":break;
+			case "css":break;
+			case "effect":break;
+			case "data":break;
+			case "event":break;
+			case "utility":break;
+			case "ajax":break;
 			default:break;
 		}
 	}
