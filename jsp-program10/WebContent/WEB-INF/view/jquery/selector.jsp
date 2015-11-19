@@ -2,7 +2,6 @@
 <%@include file="../common/header.jsp"%>
 <h1>셀렉터</h1>
 <div class="outbox" id="selectorOutbox">
-	<button id="back">뒤로가기</button>
 	<div class="box" id="selectorBox">
 		<h3>셀렉터란</h3>
 		<h4>셀렉터는 문서 내에서 원하는 엘리먼트를 쉽게 식별하고 <br />
@@ -81,14 +80,14 @@
 		},
 		/*조건에 만족하는 짝수와 홀수에 위치한 엘리먼트 구별하기*/
 		no3 : function() {
-			this.configDiv1();
+			this.configDiv3();
 			// backgroundColor 는 제이쿼리에서 미리 선언된 키값
 			$('tr:even').css('backgroundColor','pink');
 			$('tr:odd').css('backgroundColor','yellow');
 		},
 		/*n번째로 일치하는 엘리먼트 스타일 적용*/
 		no3_1 : function() {
-			this.configDiv1();
+			this.configDiv3();
 			/*
 			* eq(n) n번째로 일치하는 엘리먼트에 스타일을 적용시킨다.
 			* 인덱스는 0부터 시작하여 가로방향으로 진행하여 라인 끝에 다다르면

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="../common/header.jsp"%>
 <div class="outbox">
 	<div class="box">
 		<h3>DOM (Document Object Model) : 문서객체모델</h3>
