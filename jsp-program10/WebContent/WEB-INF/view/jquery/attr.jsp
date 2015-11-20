@@ -79,6 +79,7 @@
 			<td>form 태그 엘리먼트에서 value 값을 설정한다(setter)</td>
 		</tr>
 	</table>
+	
 </div>
 </div>
 <script type="text/javascript">
@@ -95,7 +96,44 @@
 				width : '100%',
 				height : '100%'
 			}).appendTo($('.box').empty());	
-		}	
+		},
+		/*
+		* empty() 와 remove() 차이점
+		* - 본인 자체도 사라진다 : remove()
+		* - 본인은 남고 내부 요소들만 사라진다 : empty()
+		* A append B : A 에 B를 붙인다.
+		* B appendTo A : B를 A에 붙인다.
+		*/
+		domDemo : function() {
+			$('<div id="temp"></div>').appendTo($('div.box').empty());
+			$('#temp').html(
+				'<div id="hello"><h3>Hello jQuery, Thank you appendTo() !!</h3></div>'
+			);
+		},
+		/*
+		* text() 와 html() 의 차이점
+		* text() : <E> 을 그대로 리터럴로 출력한다. 자바로 치면 toString()
+		* html() : <E> 을 역할에 맞게 번역(인터프리터)해서 출력한다.
+		*/
+		textDemo : function() {
+			$('<div id="temp"></div>').appendTo($('div.box').empty());
+			$('#temp').text(
+				'<div id="hello"><h3>Hello jQuery, Thank you appendTo() !!</h3></div>'
+			);
+		},
+		valDemo : function() {
+			$('<div id="temp"></div>').appendTo($('div.box').empty());
+			$('#temp').html(
+				'<div><input type="text" id="txt" placeholder="이름입력" />'+
+				'<button id="btn">알러트창띄우기</button><br/><div id="show"></div></div>'
+			);
+			$('#btn').click(function() {
+				var name = $('#txt').val(); 
+				alert('이름 :'+name);
+				$('#show').text('이름 : '+name);
+			});
+		}
+		
 	};
 </script>
 
