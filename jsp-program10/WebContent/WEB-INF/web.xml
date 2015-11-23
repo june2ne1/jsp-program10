@@ -24,7 +24,7 @@
   <jsp-config>
     <jsp-property-group>
       <url-pattern>*.jsp</url-pattern>
-      <include-prelude>/WEB-INF/view/common/var.jspf</include-prelude>
+      <include-prelude>/WEB-INF/view/global/var.jspf</include-prelude>
     </jsp-property-group>
   </jsp-config>
   <welcome-file-list>

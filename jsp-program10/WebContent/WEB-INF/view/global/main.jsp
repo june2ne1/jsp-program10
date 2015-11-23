@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../global/header.jsp"%>
-<div class="outbox">
-	<div class="box">
-		<div class="jumbotron"  style='background-image: url("${context}/images/hyundai.png")'>
-			<h1>한빛아카데미</h1>
-			<p>
-				<a class="btn btn-primary btn-lg" href="#" role="button">바로가기</a>
-			</p>
-		</div>
-	</div>
-</div>
+<div class="outbox"><div class="box">
+</div></div>
+<div id="footer"></div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.box').load('${context}/main.do?page=jumbotron');
+		$('#footer').load('${context}/main.do?page=footer');
+	});
+</script>

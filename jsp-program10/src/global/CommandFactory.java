@@ -1,10 +1,9 @@
 package global;
 
 public class CommandFactory {
-	public Command createCommand(String directory, String action){
-		return new Command(directory, action);
-	}
-	public Command createCommand(String directory, String action,String page){
-		return new Command(directory, action, page);
+	public Command createCommand(String action, String page){
+		System.out.println("팩토리 내부 액션 :"+action);
+		System.out.println("팩토리 내부 페이지 :"+page);
+		return new Command(action, page);
 	}
 }
