@@ -1,4 +1,4 @@
-package js;
+package member;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -14,7 +14,7 @@ import global.Seperator;
  * Servlet implementation class JsController
  */
 @WebServlet("/js/main.do")
-public class JsController extends HttpServlet {
+public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public void service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException{

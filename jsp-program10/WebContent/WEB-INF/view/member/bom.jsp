@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="../common/header.jsp"%>
+<%@include file="../global/header.jsp"%>
 <div class="outbox">
 	<div class="box">
 		<input type="button" id="back" value="뒤로가기" />

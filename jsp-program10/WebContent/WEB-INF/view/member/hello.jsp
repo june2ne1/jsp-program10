@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="../common/header.jsp"%>
+<%@include file="../global/header.jsp"%>
 <div class="outbox">
 	<div class="box">
 		자바스크립트는 <mark>객체 기반</mark>의 스크립트 프로그래밍 언어이다 <br />

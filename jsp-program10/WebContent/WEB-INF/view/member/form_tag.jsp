@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="../common/header.jsp"%>
-<h1>폼태그</h1>
-<div class="outbox">
-<div class="box">
+<%@include file="../global/header.jsp"%>
 <form action="${context}/form_tag/school_register.do" id="frm_checkbox">
 	이름 : <input type="text" name="name" />
 	나이 : <input type="text" name="age" />
@@ -31,8 +28,6 @@
 	<input type="checkbox" name="subject" value="웹표준" /> 웹표준
 	<input type="button" id="btn_form_tag" value="확 인" />
 </form>
-</div>
-</div>
 <script type="text/javascript">
 $('#btn_form_tag').click(function() {
 	var addr = $("input:radio[name=addr]:checked").val();

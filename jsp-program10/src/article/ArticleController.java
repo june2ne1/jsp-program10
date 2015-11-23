@@ -1,4 +1,4 @@
-package jquery;
+package article;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -15,7 +15,7 @@ import global.Seperator;
  * Servlet implementation class JQueryController
  */
 @WebServlet("/jquery/main.do")
-public class JQueryController extends HttpServlet {
+public class ArticleController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public void service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException{
