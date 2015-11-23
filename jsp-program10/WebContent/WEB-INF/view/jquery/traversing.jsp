@@ -85,5 +85,108 @@
 </div>	
 </div>
 <script>
+	$(document).ready(function() {
+		$('#btn_add').click(function(){traversing.addDemo()});
+		$('#btn_filter').click(function(){traversing.filterDemo()});
+		$('#btn_not').click(function(){traversing.notDemo()});
+		$('#btn_slice').click(function(){traversing.sliceDemo()});
+		$('#btn_children').click(function(){traversing.childrenDemo()});
+		$('#btn_siblings').click(function(){traversing.siblingsDemo()});
+		$('#btn_parent').click(function(){traversing.parentDemo()});
+		$('#btn_parents').click(function(){traversing.parentsDemo()});
+		$('#btn_find').click(function(){traversing.findDemo()});
+		$('#btn_map').click(function(){traversing.mapDemo()});
+		$('#btn_end').click(function(){traversing.endDemo()});
+	});
+	var traversing = {
+		makeTemp : function() {
+			$('<div id="temp">').appendTo($('.box').empty());
+		},	
+		addDemo : function() {
+			this.makeTemp();
+			$('#temp').html(
+			'<div class="yellow bg_color_yellow pad">'+
+			'<div class="black bg_color_black">바탕-검정</div>'+
+			'<div class="red bg_color_red">바탕-적색</div>'+
+			'<div class="purple bg_color_purple">바탕-보라</div>'+	
+			'<div class="orange bg_color_orange">바탕-오렌지</div>'+
+			'</div><button id="btn_foo">클릭</button>'	
+			);
+			$('#btn_foo').click(function() {
+				$('.yellow').add('.black').add('.red')
+				.add('.purple').add('.orange')
+				.css('background','white');
+			});
+			/*
+			* div 엘리먼트 선택 후 p엘리먼트를 추가한 후,
+			* 그 상태로 div 에 오렌지를 
+			*/
+		},
+		makeDiv6 : function() {
+			this.makeTemp();
+			$('#temp').html(
+			'<div id="1" class="foo"> 하나 </div>'+		
+			'<div id="2" class="foo middle"> 둘 </div>'+		
+			'<div id="3" class="foo middle"> 셋 </div>'+		
+			'<div id="4" class="foo middle"> 넷 </div>'+		
+			'<div id="5" class="foo middle"> 다섯 </div>'+		
+			'<div id="6" class="foo"> 여섯 </div>'+
+			'<button id="btn">버튼</button>'
+			);
+		},
+		filterDemo : function() {
+			this.makeDiv6();
+			$('.foo').css('background','red')
+			.addClass('txt_color_white')
+			.filter('.middle')
+			.css('background','blue');
+		},
+		notDemo : function() {
+			this.makeDiv6();
+			$('.foo').css('background','red')
+			.addClass('txt_color_white')
+			.not('.middle')
+			.css('background','blue');
+		},
+		sliceDemo : function() {
+			this.makeDiv6();
+			/*
+			* slice(begin,end)
+			* begin 은 첫 엘리먼트로 0 부터 시작
+			* end 는 마지막 엘리먼트로 불포함
+			* 파라미터가 하나이면 slice(begin)이면 끝까지를 의미함.
+			* slice(2,4)
+			* slice(2)
+			*/
+			$('#btn').click(function(){
+				var $foo = $('.foo'); 
+				$foo.slice(2,4).css('background','orange');
+				$foo.slice(4).css('background','purple');
+			});
+		},
+		childrenDemo : function() {
 
+		},
+		siblingsDemo : function() {
+
+		},
+		parentDemo : function() {
+
+		},
+		parentsDemo : function() {
+
+		},
+		childrenDemo : function() {
+
+		},
+		findDemo : function() {
+
+		},
+		mapDemo : function() {
+
+		},
+		endDemo : function() {
+
+		}
+	};
 </script>

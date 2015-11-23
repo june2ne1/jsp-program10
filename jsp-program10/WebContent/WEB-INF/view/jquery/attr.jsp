@@ -105,10 +105,13 @@
 		* B appendTo A : B를 A에 붙인다.
 		*/
 		domDemo : function() {
-			$('<div id="temp"></div>').appendTo($('div.box').empty());
+			this.common();
 			$('#temp').html(
 				'<div id="hello"><h3>Hello jQuery, Thank you appendTo() !!</h3></div>'
 			);
+		},
+		common : function() {
+			$('<div id="temp"></div>').appendTo($('div.box').empty());
 		},
 		/*
 		* text() 와 html() 의 차이점
@@ -116,13 +119,13 @@
 		* html() : <E> 을 역할에 맞게 번역(인터프리터)해서 출력한다.
 		*/
 		textDemo : function() {
-			$('<div id="temp"></div>').appendTo($('div.box').empty());
+			this.common();
 			$('#temp').text(
 				'<div id="hello"><h3>Hello jQuery, Thank you appendTo() !!</h3></div>'
 			);
 		},
 		valDemo : function() {
-			$('<div id="temp"></div>').appendTo($('div.box').empty());
+			this.common();
 			$('#temp').html(
 				'<div><input type="text" id="txt" placeholder="이름입력" />'+
 				'<button id="btn">알러트창띄우기</button><br/><div id="show"></div></div>'
