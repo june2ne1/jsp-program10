@@ -16,6 +16,7 @@ public class MainController extends HttpServlet {
 		Command command = Seperator.init(request,response); 
 		switch (command.getPage()) {
 		case "main":DispatcherServlet.send(request, response, command);break;  
+		case "header":DispatcherServlet.send(request, response, command);break;  
 		case "footer":DispatcherServlet.send(request, response, command);break;  
 		case "jumbotron":DispatcherServlet.send(request, response, command);break;  
 		default:break;

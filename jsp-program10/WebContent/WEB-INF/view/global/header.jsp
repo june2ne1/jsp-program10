@@ -60,7 +60,7 @@
           role="button" aria-haspopup="true" aria-expanded="false">회 원 <span class="caret">
           </span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">로그인</a></li>
+            <li><a href="#" id="login">로그인</a></li>
             <li><a href="${context}/member.do?page=join">회원가입</a></li>
           </ul>
         </li>
@@ -68,3 +68,25 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<script type="text/javascript">
+	$(function() {
+		$('#login').click(function() {
+			bom.popup();
+		});
+	});
+	var bom = {};
+	bom.popup = function() {
+		var url     = "${context}/member.do?";
+        var name    = "로그인";
+        var style   = "toolbar=no,status=no,directories=no,scrollbars=yes,location=no,resizable=no,border=0,menubar=no";
+        var param   = "page=login";      //없으면 지워도 됨.
+        var width   = 600;   //가로 사이즈 조절
+        var height  = 400;    //세로 사이즈 조절
+        var xpos    = (screen.availWidth - width  ) / 2;
+        var ypos    = (screen.availHeight- height ) / 2;
+        style       = style+',top='+ypos+',left='+ xpos +',width=' + width + ',height=' + height;
+        url         = url+param;
+        window.open(url,'',style);
+	        
+	}
+</script>
