@@ -1,8 +1,1 @@
-/**
- * 
- */
-var Global = {
-		makeBox : function() {
-			
-		}
-}
+

@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="C:/Users/HB02/Downloads/jstl.jar"/>
 	<classpathentry kind="lib" path="C:/Users/HB02/Downloads/standard.jar"/>
 	<classpathentry kind="lib" path="C:/oraclexe/app/oracle/product/11.2.0/server/jdbc/lib/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/jse/json_simple-1.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" >
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="${context}/css/common.css" /> 
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -53,7 +57,9 @@
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
-      <ul class="nav navbar-nav navbar-right">
+      <c:if test="${empty sessionScope.member}">
+    <!-- ..로그아웃 상태 시 표시할 태그 -->
+    <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Link</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
@@ -65,6 +71,23 @@
           </ul>
         </li>
       </ul>
+</c:if>
+ 
+<c:if test="${not empty sessionScope.member}">
+<!-- ..로그인 상태 시 표시할 태그 -->
+   <ul class="nav navbar-nav navbar-right" id="mypage">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+          role="button" aria-haspopup="true" aria-expanded="false">${member.userid} <span class="caret">
+          </span></a>
+          <ul class="dropdown-menu">
+            <li><a href="${context}/member.do?page=logout" id="logout">로그아웃</a></li>
+            <li><a href="${context}/member.do?page=mypage?userid="+${member.userid} id="mypage">마이페이지</a></li>
+          </ul>
+        </li>
+      </ul>
+</c:if>
+      
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
@@ -79,7 +102,7 @@
 		var url     = "${context}/member.do?";
         var name    = "로그인";
         var style   = "toolbar=no,status=no,directories=no,scrollbars=yes,location=no,resizable=no,border=0,menubar=no";
-        var param   = "page=login";      //없으면 지워도 됨.
+        var param   = "page=login_form";      //없으면 지워도 됨.
         var width   = 600;   //가로 사이즈 조절
         var height  = 400;    //세로 사이즈 조절
         var xpos    = (screen.availWidth - width  ) / 2;
