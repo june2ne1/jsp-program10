@@ -1,34 +1,27 @@
-<table id="tab_mypage">
+<link rel="stylesheet" href="css/common.css" type="text/css"/>
+ 
+ 
+<div id="box">
+<table>
 	<tr>
+		<td rowspan="8"><img src="${context}/images/${member.profile}" width="70%" height="80%"/></td>
 		<th>항목</th>
-		<th>값</th>
+		<th>빈 칸</th>
 	</tr>
 	<tr>
-		<td>아이디</td>
+			<td>아이디</td>
 		<td>${member.userid}</td>
 	</tr>
 	<tr>
 		<td>비밀번호</td>
-		<td>${member.password}</td>
+		<td>${member.pass}"</td>
 	</tr>
 	<tr>
 		<td>이름</td>
 		<td>${member.name}</td>
 	</tr>
 	<tr>
-		<td>생년</td>
-		<td>${member.birth}</td>
-	</tr>
-	<tr>
-		<td>전화번호</td>
-		<td>${member.phone}</td>
-	</tr>
-	<tr>
-		<td>이메일</td>
-		<td>${member.email}</td>
-	</tr>
-	<tr>
-		<td>성별</td>
+		<td>생일</td>
 		<td>${member.gender}</td>
 	</tr>
 	<tr>
@@ -36,12 +29,25 @@
 		<td>${member.addr}</td>
 	</tr>
 	<tr>
+		<td>이메일</td>
+		<td>${member.email}</td>
+	</tr>
+	
+	<tr>
 		<td>등록일</td>
-		<td>${member.regdate}</td>
+		<td>${member.regate}</td>
 	</tr>
 	<tr>
-		<td>프로필사진</td>
-		<td>${member.profile}</td>
+		<td><button id="changeImg">사진변경</button></td>
+		<td><button id="changeInfo">정보수정</button></td>
+		<td><button id="confirm">확인</button></td>
 	</tr>
 	
 </table>
+</div>
+<script>
+	$('td').css('text-align','center');
+	$('tr').add('th').add('td').css('float','center');
+	$('#box').css('clear','both').css('margin','20px');
+</script>
+ 
