@@ -2,7 +2,7 @@
 <img src="images/loading.gif" alt="로딩중.." />
 <script type="text/javascript">
 	$(document).ready(function() {
-		location.href = "${context}/main.do";
+		location.href = "${context}/main.do"; 
 	});
 </script>
 

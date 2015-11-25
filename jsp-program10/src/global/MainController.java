@@ -21,7 +21,9 @@ public class MainController extends HttpServlet {
 		MemberService memberService = MemberServiceImpl.getInstance();
 		Command command = Seperator.init(request,response); 
 		switch (command.getPage()) {
-		case "main":break;  
+		case "main":
+			System.out.println("첫번째 프로세스 진행중 ...");
+			break;  
 		case "header":break;  
 		case "footer":break;  
 		case "jumbotron":break;  
@@ -29,8 +31,7 @@ public class MainController extends HttpServlet {
 			HttpSession session = request.getSession();
 			String userid = request.getParameter("userid");
 	        session.setAttribute("member", memberService.searchById(userid));
-	         
-	        response.addCookie(new Cookie("User.Cookie","Tomcat User"));
+	        response.addCookie(new Cookie("member.cookie","tomcat_member"));
 	        request.setAttribute("member",memberService.searchById(userid));
 			break;  
 		default:break;

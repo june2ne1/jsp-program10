@@ -55,12 +55,11 @@
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default">검 색</button>
       </form>
-      <c:if test="${empty sessionScope.member}">
+<c:if test="${empty sessionScope.member}">
     <!-- ..로그아웃 상태 시 표시할 태그 -->
     <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
           role="button" aria-haspopup="true" aria-expanded="false">회 원 <span class="caret">
@@ -78,11 +77,11 @@
    <ul class="nav navbar-nav navbar-right" id="mypage">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
-          role="button" aria-haspopup="true" aria-expanded="false">${member.userid} <span class="caret">
+          role="button" aria-haspopup="true" aria-expanded="false"><c:out value="${member.name}"/> <span class="caret">
           </span></a>
           <ul class="dropdown-menu">
             <li><a href="${context}/member.do?page=logout" id="logout">로그아웃</a></li>
-            <li><a href="${context}/member.do?page=mypage?userid="+${member.userid} id="mypage">마이페이지</a></li>
+            <li><a href="${context}/member.do?page=mypage?userid=${member.userid}" id="mypage">마이페이지</a></li>
           </ul>
         </li>
       </ul>

@@ -33,19 +33,18 @@ public class MemberController extends HttpServlet {
 		case "join": DispatcherServlet.send(request, response, command);break;
 		case "login_form":DispatcherServlet.send(request, response, command); break;
 		case "login":
-		System.out.println("들어옴");
-		String userid = request.getParameter("userid");
-		String password = request.getParameter("password");
-		JSONObject obj = new JSONObject();
-		
-		MemberVO vo = service.login(userid, password);
-		System.out.println("이름 : "+vo.getName());
-		obj.put("result", "success");
-		obj.put("name", vo.getName());
-		obj.put("userid", vo.getUserid());
-		response.setContentType("application/x-json; charset=UTF-8");
-		response.getWriter().print(obj);
-		break;
+			System.out.println("들어옴");
+			String userid = request.getParameter("userid");
+			String password = request.getParameter("password");
+			JSONObject obj = new JSONObject();
+			MemberVO vo = service.login(userid, password);
+			System.out.println("이름 : "+vo.getName());
+			obj.put("result", "success");
+			obj.put("name", vo.getName());
+			obj.put("userid", vo.getUserid());
+			response.setContentType("application/x-json; charset=UTF-8");
+			response.getWriter().print(obj);
+			break;
 		case "logined":
 			String userid2 = request.getParameter("userid");
 			System.out.println("로그인드 케이스 진입 "+userid2);
@@ -55,12 +54,12 @@ public class MemberController extends HttpServlet {
 			request.setAttribute("member", service.searchById(userid2));
 			DispatcherServlet.send(request, response, command);
 			break;
-			case "logout": 
-				HttpSession session=request.getSession();  
-	            session.invalidate();  
-	            RequestDispatcher d = request.getRequestDispatcher(Constants.VIEW+"global/main.jsp");
-	            d.forward(request, response);
-			break;
+		case "logout": 
+			HttpSession session=request.getSession();  
+            session.invalidate();  
+            RequestDispatcher d = request.getRequestDispatcher(Constants.VIEW+"global/main.jsp");
+            d.forward(request, response);
+		break;
 		default:break;
 		}
 		
