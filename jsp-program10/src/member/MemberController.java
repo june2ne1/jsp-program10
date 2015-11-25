@@ -13,6 +13,8 @@ import javax.swing.SpringLayout.Constraints;
 
 import org.json.simple.JSONObject;
 
+import com.google.gson.Gson;
+
 import global.Command;
 import global.Constants;
 import global.DispatcherServlet;
@@ -28,6 +30,7 @@ public class MemberController extends HttpServlet {
 	String userid;
 	MemberVO member = new MemberVO();
 	JSONObject obj = new JSONObject();
+	Gson gson = new Gson();
 	@SuppressWarnings("unchecked")
 	public void service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException{
@@ -43,10 +46,8 @@ public class MemberController extends HttpServlet {
 			String password = request.getParameter("password");
 			member = service.login(userid, password);
 			System.out.println("이름 : "+member.getName());
+			obj.put("result", "success");
 			obj.put("name", member.getName());
-			obj.put("userid", member.getUserid());
-			obj.put("birth", member.getUserid());
-			obj.put("phone", member.getUserid());
 			obj.put("userid", member.getUserid());
 			response.setContentType("application/x-json; charset=UTF-8");
 			response.getWriter().print(obj);
@@ -54,8 +55,8 @@ public class MemberController extends HttpServlet {
 		case "logined":
 			userid = request.getParameter("userid");
 			System.out.println("로그인드 케이스 진입 "+userid);
-			MemberVO loginedUser = service.searchById(userid);
-			request.setAttribute("member", loginedUser);
+			member = service.searchById(userid);
+			request.setAttribute("member", member);
 			command.setAction("main");
 			request.setAttribute("member", service.searchById(userid));
 			break;
@@ -73,14 +74,11 @@ public class MemberController extends HttpServlet {
 			break;
 		case "detail":
 			System.out.println("들어옴");
-			userid = request.getParameter("userid");
-			member = service.searchById(userid);
-			System.out.println("이름 : "+member.getName());
-			obj.put("result", "success");
-			obj.put("name", member.getName());
-			obj.put("userid", member.getUserid());
+			member = service.searchById(request.getParameter("userid"));
 			response.setContentType("application/x-json; charset=UTF-8");
-			response.getWriter().print(obj);
+			String json = gson.toJson(member);
+			System.out.println("제이슨 결과값 : "+json);
+			response.getWriter().print(json);
 			return; // ajax  
 		default:break;
 		}
