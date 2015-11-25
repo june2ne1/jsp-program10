@@ -25,43 +25,64 @@ import global.Seperator;
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	MemberService service = MemberServiceImpl.getInstance();
+	String userid;
+	MemberVO member = new MemberVO();
+	JSONObject obj = new JSONObject();
 	@SuppressWarnings("unchecked")
 	public void service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException{
 		Command command = Seperator.init(request,response); 
 		switch (command.getPage()) {
-		case "join": DispatcherServlet.send(request, response, command);break;
-		case "login_form":DispatcherServlet.send(request, response, command); break;
+		case "join": 
+			break;
+		case "login_form":
+			break;
 		case "login":
 			System.out.println("들어옴");
-			String userid = request.getParameter("userid");
+			userid = request.getParameter("userid");
 			String password = request.getParameter("password");
-			JSONObject obj = new JSONObject();
-			MemberVO vo = service.login(userid, password);
-			System.out.println("이름 : "+vo.getName());
+			member = service.login(userid, password);
+			System.out.println("이름 : "+member.getName());
 			obj.put("result", "success");
-			obj.put("name", vo.getName());
-			obj.put("userid", vo.getUserid());
+			obj.put("name", member.getName());
+			obj.put("userid", member.getUserid());
 			response.setContentType("application/x-json; charset=UTF-8");
 			response.getWriter().print(obj);
-			break;
+			return; // ajax 통과시 return 종료
 		case "logined":
-			String userid2 = request.getParameter("userid");
-			System.out.println("로그인드 케이스 진입 "+userid2);
-			MemberVO loginedUser = service.searchById(userid2);
+			userid = request.getParameter("userid");
+			System.out.println("로그인드 케이스 진입 "+userid);
+			MemberVO loginedUser = service.searchById(userid);
 			request.setAttribute("member", loginedUser);
 			command.setAction("main");
-			request.setAttribute("member", service.searchById(userid2));
-			DispatcherServlet.send(request, response, command);
+			request.setAttribute("member", service.searchById(userid));
 			break;
 		case "logout": 
 			HttpSession session=request.getSession();  
             session.invalidate();  
             RequestDispatcher d = request.getRequestDispatcher(Constants.VIEW+"global/main.jsp");
             d.forward(request, response);
-		break;
+            return; // RequestDispatcher 사용때문에 return 종료
+		case "mypage": 
+			userid = request.getParameter("userid");
+			System.out.println("로그인드 케이스 진입 "+userid);
+			member = service.searchById(userid);
+			request.setAttribute("member", member);
+			break;
+		case "detail":
+			System.out.println("들어옴");
+			userid = request.getParameter("userid");
+			member = service.searchById(userid);
+			System.out.println("이름 : "+member.getName());
+			obj.put("result", "success");
+			obj.put("name", member.getName());
+			obj.put("userid", member.getUserid());
+			response.setContentType("application/x-json; charset=UTF-8");
+			response.getWriter().print(obj);
+			return; // ajax  
 		default:break;
 		}
+		DispatcherServlet.send(request, response, command);
 		
 	}
 }

@@ -81,7 +81,7 @@
           </span></a>
           <ul class="dropdown-menu">
             <li><a href="${context}/member.do?page=logout" id="logout">로그아웃</a></li>
-            <li><a href="${context}/member.do?page=mypage?userid=${member.userid}" id="mypage">마이페이지</a></li>
+            <li><a href="${context}/member.do?page=mypage&userid=${member.userid}" id="mypage">마이페이지</a></li>
           </ul>
         </li>
       </ul>
