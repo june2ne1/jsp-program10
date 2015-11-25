@@ -13,7 +13,7 @@
 						function(data){
 					var table = "<table id="tab_mypage"><tr><th>항목</th><th>값</th></tr><tr><td>아이디</td>"
 					+"<td>${member.userid}</td></tr><tr><td>비밀번호</td>"
-					+"<td><input type="password" placeholder="${member.password}"/></td>"
+					+"<td><input type="password" placeholder="${data.password}"/></td>"
 					+"</tr><tr><td>이름</td><td>${member.name}</td></tr><tr><td>생년</td><td>${member.birth}</td>"
 					+"</tr><tr><td>전화번호</td><td><input type="text" placeholder="${member.phone}"/></td></tr>"
 					+"<tr><td>이메일</td><td><input type="text" placeholder="${member.email}"/></td></tr>"

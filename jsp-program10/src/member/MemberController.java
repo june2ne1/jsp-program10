@@ -43,8 +43,10 @@ public class MemberController extends HttpServlet {
 			String password = request.getParameter("password");
 			member = service.login(userid, password);
 			System.out.println("이름 : "+member.getName());
-			obj.put("result", "success");
 			obj.put("name", member.getName());
+			obj.put("userid", member.getUserid());
+			obj.put("birth", member.getUserid());
+			obj.put("phone", member.getUserid());
 			obj.put("userid", member.getUserid());
 			response.setContentType("application/x-json; charset=UTF-8");
 			response.getWriter().print(obj);
