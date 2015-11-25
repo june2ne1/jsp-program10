@@ -5,7 +5,7 @@
 <div id="box">
 <table>
 	<tr>
-		<td rowspan="8"><img src="${member.profile}" width="70%" height="80%"/></td>
+		<td rowspan="8"><img src="${context}/images/${member.profile}" width="70%" height="80%"/></td>
 		<th>항목</th>
 		<th>빈 칸</th>
 	</tr>
@@ -49,6 +49,6 @@
 <script>
 	$('td').css('text-align','center');
 	$('tr').add('th').add('td').css('float','center');
-	$('#box').css('clear','both').css('margin','50px');
+	$('#box').css('clear','both').css('margin','20px');
 </script>
  
