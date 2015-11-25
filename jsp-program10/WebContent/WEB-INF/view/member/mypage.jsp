@@ -64,7 +64,7 @@
 					
 				});
 			},
-			update : function(a,b,c) {
+			update : function() {
 				$.ajax('',{
 					data : {},
 					dataType : 'json',
