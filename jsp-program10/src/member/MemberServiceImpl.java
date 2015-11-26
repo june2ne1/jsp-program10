@@ -14,19 +14,12 @@ public class MemberServiceImpl  implements MemberService{
 	 */
 	// 회원가입
 	@Override
-	public String join(MemberVO o) {
-		String temp = "";
-		System.out.println("회원가입 " +o.toString());
-		if (dao.insert(o) == 1) {
-			System.out.println("회원가입 성공");
-		}else{
-			System.out.println("회원가입 실패");
-		}
-		return temp;
+	public int join(MemberVO member) {
+		return dao.insert(member);
 	}
 	//비번변경
 	@Override
-	public int changePass(MemberVO o) {
+	public int change(MemberVO o) {
 		return dao.update(o);
 	}
 	 // 회원탈퇴

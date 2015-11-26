@@ -5,12 +5,12 @@
 		Global.init();
 		$('#header').load('${context}/main.do?page=header'); 
 		$('#footer').load('${context}/main.do?page=footer');
-		Member.detail();
+		Member.detail('${context}/member.do?page=detail&userid=${member.userid}');
 	});
 	var Member = {
-			detail : function() {
-				$.getJSON('${context}/member.do?page=detail&userid=${member.userid}',
-						function(data){
+			detail : function(url) {
+				$.getJSON(url,
+					function(data){
 					var table = '<table><tr><td rowspan="8" id="td_profile"><img id="profile" src="${context}/images/${member.profile}" width="70%" height="80%"/></td>'
 					+'<th id="item">항목</th><th>빈 칸</th></tr><tr><td>아이디</td><td>${member.userid}</td></tr><tr><td>비밀번호</td><td>${member.password}"'
 					+'</td></tr><tr><td>이름</td><td>${member.name}</td></tr><tr><td>생일</td><td>${member.gender}</td></tr><tr>'
@@ -29,13 +29,15 @@
 			updateForm : function() {
 				$.getJSON('${context}/member.do?page=detail&userid=${member.userid}',
 						function(data){
-					$('<form action="${context}/member/update" id="frm">').appendTo($('#box').empty());
-					var table = '<table><tr><td rowspan="8" id="td_profile"><img id="profile" src="${context}/images/${member.profile}" width="70%" height="80%"/></td>'
+					$('<form action="${context}/member/update" id="frm">')
+					.appendTo($('#box').empty());
+					var table = '<table><tr><td rowspan="9" id="td_profile"><img id="profile" src="${context}/images/${member.profile}" width="70%" height="80%"/></td>'
 					+'<th id="item">항목</th><th>빈 칸</th></tr><tr><td>아이디</td><td>${member.userid}</td></tr><tr>'
 					+'<td>비밀번호</td><td><input type="password" id="password" value="${member.password}">'
 					+'</td></tr><tr><td>이름</td><td>${member.name}</td></tr><tr><td>생일</td><td>${member.gender}</td></tr><tr>'
 					+'<td>주소</td><td><input type="text" id="addr" value="${member.addr}"></td></tr>'
 					+'<tr><td>이메일</td><td><input type="text" id="email" value="${member.email}"></td>'
+					+'<td><input type="text" id="phone" value="${member.phone}"></td>'
 					+'</tr><tr><td>등록일</td><td>${member.regdate}</td></tr><tr>'
 					+'<td><button id="changeImg">사진변경</button></td>'
 					+'<td><button id="changeInfo">정보수정</button></td>'
@@ -46,12 +48,18 @@
 						$('#frm').submit(function(e) {
 							e.preventDefault(); /* 기본 폼태그의 서브밋을 막아라. 자스의 서브밋을 실행해라 */
 							$.ajax('${context}/member.do',{
-								type : 'post',
-								data : {},
+								type : 'get',
+								data : {
+									password : $('#password').val(),
+									addr : $('#addr').val(),
+									phone : $('#phone').val(),
+									email : $('#email').val(),
+									page : 'update'
+								},
 								async : true, // 비동기로 할 지 여부, 기본값  true, 생략가능
 								dataType : 'json',
-								success : function() {
-									Member.detail();
+								success : function(data) {
+									location.href="${context}/member.do?page=mypage&userid="+data.userid;
 								},
 								error : function(xhr, status, msg) {
 									alert('에러발생상태 : '+status +', 내용 :'+msg);
@@ -86,3 +94,12 @@
 			}
 	};
 </script>
+<!-- 
+	* 주요속성
+	* data : 서버에 전송할 데이터, key/value 형식의 객체
+	* dataType : 서버가 리턴하는 데이터 타입 (xml, json, script, html)
+	* type : 서버로 전송하는 데이터의 타입 (POST, GET)
+	* url : 데이터를 전송할 URL
+	* success : ajax통신에 성공했을 때 호출될 이벤트 핸들러
+	* error : ajax통신이 실패했을 때 호출될 이벤트 핸들러
+ -->

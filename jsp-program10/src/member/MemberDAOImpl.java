@@ -74,22 +74,26 @@ public class MemberDAOImpl implements MemberDAO{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("실행 후  "+result);
+		System.out.println("DAO : 회원가입 결과  "+result);
 		return result;
 	}
-	public int update(MemberVO o) {
+	public int update(MemberVO member) {
 		int result = 0;
 		try {
-			String sql = DML.update("member", "?,?,?", "userid", o.getUserid());
+			String sql = "update member set password = ?, addr = ?, phone = ?, email = ?"
+					+ "where userid = ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, o.getPassword());
-			pstmt.setString(2, o.getAddr());
-			pstmt.setString(3, o.getUserid());
+			pstmt.setString(1, member.getPassword());
+			pstmt.setString(2, member.getAddr());
+			pstmt.setString(3, member.getPhone());
+			pstmt.setString(4, member.getEmail());
+			pstmt.setString(5, member.getUserid());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("DAO : 오라클 변경후 리턴값 : "+result);
 		return result;
 	}
 

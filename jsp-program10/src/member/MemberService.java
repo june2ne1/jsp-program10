@@ -7,9 +7,9 @@ public interface MemberService {
 	 * DML -> pstmt.executeUpdate()
 	 */
 	// 회원가입
-	public String join(MemberVO o);
+	public int join(MemberVO o);
 	// 비번 변경
-	public int changePass(MemberVO o);
+	public int change(MemberVO o);
 	// 회원 탈퇴
 	public int remove(String userid);
 	/**
