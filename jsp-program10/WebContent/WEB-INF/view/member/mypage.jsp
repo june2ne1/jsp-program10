@@ -17,12 +17,15 @@
 					+'<td>주소</td><td>${member.addr}</td></tr><tr><td>이메일</td><td>${member.email}</td>'
 					+'</tr><tr><td>등록일</td><td>${member.regdate}</td></tr><tr>'
 					+'<td><button id="changeImg">사진변경</button></td>'
-					+'<td><button id="changeInfo">정보수정</button></td>'
+					+'<td><button id="changeInfo">정보수정</button><button id="remove">회원탈퇴</button></td>'
 					+'<td><button id="confirm">확인</button></td></tr></table>';
 					$('#box').html(table);
 					Member.style();
 					$('#changeInfo').click(function() {
 						Member.updateForm();
+					});
+					$('#remove').click(function() {
+						Member.remove('${member.userid}');
 					});
 				});
 			},
@@ -91,6 +94,22 @@
 				$('#item').css('width','400px');
 				$('#profile').css('width','300px');
 				$('#td_profile').css('width','400px');
+			},
+			remove : function(userid) {
+				$.ajax('${context}/member.do',{
+					data : {
+						userid : userid,
+						page : 'remove'
+					},
+					dataType : 'json',
+					success : function(data) {
+						alert('회원탈퇴 되었습니다.');
+						location.href = "${context}/member.do?page=logout";
+					},
+					error : function(xhr, status, msg) {
+						alert('에러발생상태 : '+status +', 내용 :'+msg);
+					}
+				});
 			}
 	};
 </script>

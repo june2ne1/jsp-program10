@@ -58,7 +58,9 @@ public class MemberDAOImpl implements MemberDAO{
 	public int insert(MemberVO o) {
 		int result = 0;
 		try {
-			String sql = "insert into member values(?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into member("
+					+ "userid,password,name,birth,phone,email,gender,addr,profile,regdate"
+					+ ") values(?,?,?,?,?,?,?,?,?,sysdate)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, o.getUserid());
 			pstmt.setString(2, o.getPassword());
@@ -161,12 +163,14 @@ public class MemberDAOImpl implements MemberDAO{
 	public int delete(String key) {
 		int result = 0;
 		try {
-			pstmt = con.prepareStatement(DML.delete("member", "userid", key));
+			String sql = "delete from member where userid = ?";
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, key);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		System.out.println("삭제 성공 !");
 		return result;
 	}
 	public MemberVO login(String id, String pass){

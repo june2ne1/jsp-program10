@@ -29,6 +29,7 @@ public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	MemberService service = MemberServiceImpl.getInstance();
 	String userid,password,name,email,birth,phone,gender,addr;
+	int result;
 	MemberVO member = new MemberVO();
 	JSONObject obj = new JSONObject();
 	Gson gson = new Gson();
@@ -43,15 +44,10 @@ public class MemberController extends HttpServlet {
 		case "join":
 			break;
 		case "join_member": 
-			System.out.println("조인멤버 진입");
 			userid = request.getParameter("userid");
-			System.out.println("가입하는 아이디33 :"+userid);
 			password = request.getParameter("password");
-			System.out.println("가입하는 비번 :"+password);
 			name = request.getParameter("name");
-			System.out.println("가입하는 이름 :"+name);
 			email = request.getParameter("email");
-			System.out.println("가입하는 이메일 :"+email);
 			birth = request.getParameter("birth");
 			phone = request.getParameter("phone");
 			gender = request.getParameter("gender");
@@ -102,11 +98,20 @@ public class MemberController extends HttpServlet {
 			request.setAttribute("member", member);
 			break;
 		case "detail":
-			System.out.println("멤버의 이메일 :"+member.getEmail());
-			System.out.println("세션의 이메일 : "+session.getAttribute("member"));
 			String json = gson.toJson(session.getAttribute("member"));
 			DispatcherJson.sendGson(response, json);
 			return; // ajax  
+		case "remove" : 
+			userid = request.getParameter("userid");
+			result = service.remove(userid);
+			if (result == 1) {
+				obj.put("result", "success");
+				DispatcherJson.sendJSONObject(response, obj);
+			} else {
+				obj.put("result", "fail");
+				DispatcherJson.sendJSONObject(response, obj);
+			}		
+			return;
 		case "update" : 
 			String password = request.getParameter("password");
 			String addr = request.getParameter("addr");

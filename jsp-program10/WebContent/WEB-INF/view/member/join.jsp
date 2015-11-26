@@ -128,7 +128,7 @@
 							footer.id = 'footer';
 							document.body.appendChild(footer);
 							$('<div id="box"></div>').appendTo($('#outbox').empty());
-							$('#box').append('<h1>환영합니다.'+data.name+'</h1>');
+							$('#box').append('<h1>환영합니다.'+data.name+'</h1><br/><a href="${context}/main.do">홈으로</a>')
 						},
 						error : function(xhr,status,msg) {
 							alert("상태 : "+status+", 내용 :"+msg);
