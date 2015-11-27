@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import global.Command;
 import global.Constants;
 import global.DispatcherServlet;
+import global.ParamMap;
 import global.DispatcherJson;
 import global.Seperator;
 
@@ -28,7 +29,8 @@ import global.Seperator;
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	MemberService service = MemberServiceImpl.getInstance();
-	String userid,password,name,email,birth,phone,gender,addr;
+	String userid,password,name,email,birth,phone,gender,portal;
+	StringBuffer addr;
 	int result;
 	MemberVO member = new MemberVO();
 	JSONObject obj = new JSONObject();
@@ -45,22 +47,32 @@ public class MemberController extends HttpServlet {
 			break;
 		case "join_member": 
 			userid = request.getParameter("userid");
+			System.out.println("아이디(텍스트)"+userid);
 			password = request.getParameter("password");
+			System.out.println("비번(텍스트)"+password);
 			name = request.getParameter("name");
+			System.out.println("이름(텍스트)"+name);
 			email = request.getParameter("email");
+			System.out.println("이메일(텍스트)"+email);
+			portal = request.getParameter("portal");
+			System.out.println("포탈(셀렉)"+portal);
 			birth = request.getParameter("birth");
+			System.out.println("생년(텍스트)"+birth);
 			phone = request.getParameter("phone");
+			System.out.println("전화번호(셀렉)"+phone);
 			gender = request.getParameter("gender");
-			addr = request.getParameter("addr");
+			System.out.println("성별(라디오)"+gender);
+			addr = ParamMap.getValuesBy(request, "addr");
+			System.out.println("주소(체크박스)"+addr); 
 			
 			member.setUserid(userid);
 			member.setPassword(password);
 			member.setName(name);
-			member.setEmail(email);
+			member.setEmail(email+portal);
 			member.setBirth(birth);
 			member.setPhone(phone);
 			member.setGender(gender);
-			member.setAddr(addr);
+			member.setAddr(addr.toString());
 			int result2 = service.join(member);
 			if (result2 == 1) {
 				System.out.println("회원가입 성공");

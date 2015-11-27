@@ -2,7 +2,7 @@
 <div id="temp">
 <TABLE WIDTH=620 HEIGHT=40 BORDER=0 CELLSPACING=1 CELLPADDING=1 ALIGN=CENTER>
   <TR BGCOLOR=#A0A0A0>
-    <TD ALIGN=CENTER><FONT SIZE=4><B>회 원 가 입3</B></FONT></TD>
+    <TD ALIGN=CENTER><FONT SIZE=4><B>회 원 가 입</B></FONT></TD>
   </TR>
 </TABLE>
 
@@ -43,12 +43,19 @@
 		<TD WIDTH=120 ALIGN=CENTER><B>이메일</B></TD>
 		<TD WIDTH=500>
 			<INPUT TYPE=TEXT NAME="email" id="email" SIZE=60 MAXLENGTH=90 style="ime-mode:inactive">
+			<SELECT NAME=portal SIZE=1>
+				<OPTION VALUE="0" SELECTED>포털선택
+				<OPTION VALUE="@naver.com">@naver.com
+				<OPTION VALUE="@gmail.com">@gmail.com
+				<OPTION VALUE="@hotmail.com">@hotmail.com
+				<OPTION VALUE="@daum.net">@daum.net
+			</SELECT> 
 		</TD>
 	</TR>
   	<TR>
 		<TD WIDTH=120 ALIGN=CENTER><B>생년</B></TD>
 		<TD WIDTH=500>
-			<INPUT TYPE=TEXT NAME="birth" SIZE=6 MAXLENGTH=6> 
+			<INPUT TYPE=TEXT NAME="birth" id="birth" SIZE=6 MAXLENGTH=6> 
 		</TD>
 	</TR>
 	<TR>
@@ -100,17 +107,23 @@
 	});
 	var Join = {
 			join : function () {
-				alert("조인멤버 클릭했음");
 				$('#frm_join').submit(function(e) {
-					alert("조인멤버 서브밋통과했음");
 					$.ajax('${context}/member.do',{
 						data : {
 							userid : $('#userid').val(),
 							password : $('#password').val(),
 							name : $('#name').val(),
 							email : $('#email').val(),
+							portal : $("select[name=portal] option:selected").val(),
 							birth : $('#birth').val(),
-							addr : '체크박스', 
+							addr : function() {
+								var arr = [];
+								$('input:checkbox[name=addr]:checked').each(function() {
+									arr.push($(this).val());
+								});
+								return arr;
+							},
+								
 							gender : $("input:radio[name=gender]:checked").val(),
 							phone : $("select[name=phone] option:selected").val(),
 							page : 'join_member'
@@ -138,14 +151,7 @@
 				});
 				$('#frm_join').submit(); 
 				
-			},
-		checkbox : function(addr) {
-				var arr = [];
-				addr.each(function() {
-					arr.push($(this).val());
-				});
-				return arr;
-		}
+			}
 	};
 </script>
 
