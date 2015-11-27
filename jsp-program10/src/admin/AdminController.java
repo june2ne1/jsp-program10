@@ -43,17 +43,18 @@ public class AdminController extends HttpServlet {
 		HttpSession session=request.getSession(); 
 		switch (command.getPage()) {
 		case "main":
-			request.setAttribute("memberList", service.getMemberList());
 			break;
 		case "header":
 			break;
 		case "member_list":
+			System.out.println("회원목록 case 진입");
+			
 			list = service.getMemberList();
 			JsonElement element = gson.toJsonTree(list, new TypeToken<List>() {}.getType());
-			JsonArray jsonArray = element.getAsJsonArray();
-			response.setContentType("application/json");
-			response.getWriter().print(jsonArray);
-			break;	
+			JsonArray memberList = element.getAsJsonArray();
+			response.setContentType("application/json; charset=UTF-8");
+			response.getWriter().print(memberList);
+			return;	
 		default:
 			break;
 		}

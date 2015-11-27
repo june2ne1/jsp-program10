@@ -12,55 +12,7 @@
   <a href="#" class="list-group-item" id="mgmt_stat">통계보기</a>
 </div>
 <div id="main_right">
-<h1>회원목록</h1>
-<c:choose>
- <c:when test="${fn:length(memberList)==0}">
-  <table id="tab_member">
-   <tr>
-    <th>아이디</th>
-    <th>이름</th>
-    <th>성별</th>
-    <th>생년원일</th>
-    <th>전화번호</th>
-    <th>이메일</th>
-   </tr>
-   <tr>
-    <td colspan="6"><h2>회원목록이 없습니다.</h2></td>
-   </tr>
-  </table>
- </c:when>
- <c:otherwise>
-  <table id="tab_member">
-  <tr>
-    <th>아이디</th>
-    <th>이름</th>
-    <th>성별</th>
-    <th>생년원일</th>
-    <th>전화번호</th>
-    <th>이메일</th>
-   </tr>
-   <c:forEach var="member" items="${memberList}">
-    <tr>
-     <td>${member.userid}</td>
-     <td>${member.name}</td>
-     <td>${member.gender}</td>
-     <td>${member.birth}</td>
-     <td>${member.phone}</td>
-     <td>${member.email}</td>
-    </tr>
-   </c:forEach>
-  </table>
- </c:otherwise>
-</c:choose>
-<h1>테이블 생성</h1>
-<form action="${context}/bank/main.do" id="frm_admin_result"
- id="frm_admin_table">
- <input type="text" name="table_name" placeholder="테이블명 입력" /> <input
-  type="text" name="column" placeholder="컬럼명 입력" /> <input type="text"
-  name="pk" placeholder="프라이머리 키 입력" /> <input type="button"
-  id="btn_admin_table" value="생 성" />
- <!--  GET 방식 <input type="hidden" name="page" value="admin_result"/> -->
-</form>
+	<h1>관리자 홈입니다</h1>
 </div>
 <script>
 $(function() {
@@ -76,8 +28,28 @@ $(function() {
     $('#btn_admin_table').submit();
   });
  var Admin = {
-	 memberList : function() {
-		
+	memberList : function() {
+		 $.getJSON('${context}/admin.do?page=member_list', function(data) {
+			 var table = '<h1>회원목록</h1>'
+					+'<table id="tab_member"><tr><th>아이디</th><th>이름</th><th>성별</th>'
+					+'<th>생년원일</th><th>전화번호</th><th>이메일</th></tr>';
+					$.each(data, function() {
+						table +='<tr><td>'+this.userid+'</td>'
+							+'<td>'+this.name+'</td><td>'+this.gender+'</td>'
+							+'<td>'+this.birth+'</td><td>'+this.phone+'</td>'
+							+'<td>'+this.email+'</td></tr>';
+					});
+					table += '</table>';
+					
+					$(table).appendTo($('#main_right').empty());
+		});
+	},
+	memberNotExist : function() {
+		var table ='<h1>회원목록</h1><table id="tab_member"><tr><th>아이디</th>';
+			table += '<th>이름</th><th>성별</th><th>생년원일</th><th>전화번호</th><th>이메일</th></tr>';
+			table += '<tr><td colspan="6"><h2>회원목록이 없습니다.</h2></td></tr></table>';
+			$(table).appendTo($('#main_right').empty());
 	}
  };
+ 
 </script>
