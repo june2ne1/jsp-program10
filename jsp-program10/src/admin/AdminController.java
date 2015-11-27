@@ -14,6 +14,9 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
 
 import global.Command;
 import global.DispatcherServlet;
@@ -40,12 +43,17 @@ public class AdminController extends HttpServlet {
 		HttpSession session=request.getSession(); 
 		switch (command.getPage()) {
 		case "main":
-			list = service.getMemberList();
-			System.out.println("회원목록 :"+list);
-			System.out.println("CON : 관리자 메인페이지 진입");
+			request.setAttribute("memberList", service.getMemberList());
 			break;
 		case "header":
 			break;
+		case "member_list":
+			list = service.getMemberList();
+			JsonElement element = gson.toJsonTree(list, new TypeToken<List>() {}.getType());
+			JsonArray jsonArray = element.getAsJsonArray();
+			response.setContentType("application/json");
+			response.getWriter().print(jsonArray);
+			break;	
 		default:
 			break;
 		}
