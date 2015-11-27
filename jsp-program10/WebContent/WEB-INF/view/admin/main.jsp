@@ -1,10 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:useBean id="now" class="java.util.Date"/>
-현재시간 :  <c:out value="${now}"/><br  />
-날짜 : <fmt:formatDate value="${now}" type="date"/><br  />
-시간 : <fmt:formatDate value="${now}" type="time"/><br  />
-<!-- 또는 아래와 같이 한줄로 설정가능 -->
-<%-- <fmt:formatDate value="${now}" type="both"/><br  /> --%>
+<div id="header"></div>
+<div class="list-group" id="main_left">
+  <a href="#" class="list-group-item active">
+    관리자 기능
+  </a>
+  <a href="#" class="list-group-item" id="admin_home">홈</a>
+  <a href="#" class="list-group-item" id="mgmt_member">회원관리</a>
+  <a href="#" class="list-group-item" id="mgmt_prod">제품관리</a>
+  <a href="#" class="list-group-item" id="mgmt_emp">사원관리</a>
+  <a href="#" class="list-group-item" id="mgmt_stat">통계보기</a>
+</div>
+<div id="main_right">
 <h1>회원목록</h1>
 <c:choose>
  <c:when test="${fn:length(list)==0}">
@@ -46,9 +53,22 @@
   id="btn_admin_table" value="생 성" />
  <!--  GET 방식 <input type="hidden" name="page" value="admin_result"/> -->
 </form>
+</div>
 <script>
- document.getElementById('btn_admin_table').addEventListener('click',
-   function() {
-    document.getElementById('btn_admin_table').submit();
-   });
+$(function() {
+	$('#header').load('${context}/admin.do?page=header');
+	$('#main_left').css("float","left").css('width','300px').css('text-align','center');
+	$('#main_right').css("float","left").css("margin-left","150px");
+	$('#mgmt_member').click(function() {
+		Admin.memberList();
+	});
+});	
+ $('#btn_admin_table').click(function() {
+    $('#btn_admin_table').submit();
+  });
+ var Admin = {
+	 memberList : function() {
+		
+	}
+ };
 </script>

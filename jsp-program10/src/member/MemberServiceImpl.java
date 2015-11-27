@@ -43,10 +43,7 @@ public class MemberServiceImpl  implements MemberService{
 	//ID로 회원검색
 	@Override
 	public MemberVO searchById(String id) {
-		MemberVO m = new MemberVO();
-		m =dao.selectOneBy(id);
-		
-		return m;
+		return dao.selectOneBy(id);
 	}
 	// 검색어로 검색
 	@Override
@@ -56,8 +53,6 @@ public class MemberServiceImpl  implements MemberService{
 	// 전체 회원목록 
 	@Override
 	public List<MemberVO> getList() {
-		List<MemberVO> list = new ArrayList<MemberVO>();
-		list = dao.selectAll();
-		return list;
+		return dao.selectAll();
 	}
 }

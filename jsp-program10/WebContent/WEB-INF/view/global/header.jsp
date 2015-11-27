@@ -67,6 +67,7 @@
           <ul class="dropdown-menu">
             <li><a href="#" id="login">로그인</a></li>
             <li><a href="${context}/member.do?page=join">회원가입</a></li>
+            <li><a href="#" id="admin">관리자</a></li>
           </ul>
         </li>
       </ul>
@@ -95,6 +96,9 @@
 		$('#login').click(function() {
 			bom.popup();
 		});
+		$('#admin').click(function() {
+			admin.checkAdmin();
+		});
 	});
 	var bom = {};
 	bom.popup = function() {
@@ -111,4 +115,24 @@
         window.open(url,'',style);
 	        
 	}
+	var admin = {
+		checkAdmin : function() {
+			// confirm() 은 예 와 아니오 버튼이 존재하는 팝업창
+			// 예 버튼을 클릭하면 true 리턴
+			// 아니오 버튼을 클릭하면 false 리턴
+			var isAdmin = confirm('관리자입니까?');
+			if (!isAdmin) {
+				alert('관리자만 접근허용합니다.');
+			} else {
+				var password = prompt('관리자 비번을 입력하세요.');
+				// 관리자는 이미 회사로부터 접근번호를 부여받았으므로
+				// 이 예제에서는 1 로 미리 정의해둠
+				if (password == 1) {
+					location.href = "${context}/admin.do?page=main";
+				} else {
+					alert('관리자 비번이 틀립니다.');
+				}
+			}
+		}	
+	};
 </script>
