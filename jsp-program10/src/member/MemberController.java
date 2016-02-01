@@ -14,8 +14,8 @@ import javax.swing.SpringLayout.Constraints;
 import org.json.simple.JSONObject;
 
 import com.google.gson.Gson;
+import com.hnb.global.Command;
 
-import global.Command;
 import global.Constants;
 import global.DispatcherServlet;
 import global.ParamMap;

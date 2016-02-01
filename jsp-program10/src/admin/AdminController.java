@@ -17,8 +17,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
+import com.hnb.global.Command;
 
-import global.Command;
 import global.DispatcherServlet;
 import global.Seperator;
 import member.MemberService;

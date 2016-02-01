@@ -3,6 +3,8 @@ package global;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.hnb.global.Command;
+
 public class Seperator {
 	public static CommandFactory factory = new CommandFactory();
 	public static Command command;

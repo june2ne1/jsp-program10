@@ -1,5 +1,7 @@
 package global;
 
+
+
 public class Command {
 	private String action, view, page; 
 	public Command(String action, String page) {

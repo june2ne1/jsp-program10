@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.hnb.global.Command;
+
 import member.MemberService;
 import member.MemberServiceImpl;
 
